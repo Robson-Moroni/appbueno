@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layoutdefault/layout">
+<html layout:decorate="layoutdefault/layout">
 
-<div layout:fragment="contentPage">
-	CONTEÚDO DOS EXERCÍCIOS AQUI<br>
- <strong th:text="${Hello}"></strong>
-</div>
-
+<section layout:fragment="content">
+	<div class="row">
+	<div class="col-sm-12" style="background-color: black; width: 100%; border-radius: 10px;">
+	asdasd
+	</div>
+	</div>
+</section>
 </html>
