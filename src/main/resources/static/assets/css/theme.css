@@ -1,0 +1,23 @@
+.cardWidthFull {
+	background-color: #FFF;
+	width: 100%;
+	border-radius: 0.625rem;
+	padding: 0.313rem;
+}
+
+
+.nav-pills .nav-link {
+	border-radius: 25px !important;
+}
+
+.card-header {
+	background-color: #0065FF !important;
+}
+
+.btn-pill-white {
+	background-color: #FFF;
+	color: #0065FF;
+	border-radius: 25px;
+	padding-top: 0.313rem;
+	padding-bottom: 0.313rem;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div th:fragment="niveistreino">
+		<div class="card br-full-15px">
+			<div class="card-header br-top-15px text-white">
+				<div class="row">
+					<div class="col-sm-9 font-size-18px" style="font-weight: 600;">
+						Níveis de Treino
+					</div>
+					<div class="col-sm-3 font-size-12px text-center">
+						<a href="#">
+							<div class="btn-pill-white" style="font-weight: 600;">Novo</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body" style="padding-left: 0; padding-right: 0; padding-top: 0.313rem; padding-bottom: 0.938rem;">
+				<table id="niveistreinoTable" class="display" style="width:100%">
+					<thead style="background-color: #F3F3F3; color: #0065FF">
+						<tr>
+							<th style="padding-left: 0.625rem">Nome do Grupo</th>
+							<th>Descrição</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="padding-left: 0.625rem">Iniciante</td>
+							<td>Nível de iniciantes</td>
+						</tr>
+						<tr>
+							<td style="padding-left: 0.625rem">Intermediário</td>
+							<td>Nível de intermediários</td>
+						</tr>
+						<tr>
+							<td style="padding-left: 0.625rem">Avançado</td>
+							<td>Nível de avançados</td>
+						</tr>
+					</tbody>
+					
+				</table>
+			</div>
+		</div>
+</div>
+
+</html>

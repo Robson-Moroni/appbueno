@@ -11,9 +11,9 @@ import com.sistema.apptreino.TagConstants;
 
 @Controller
 @RequestMapping("/cadastro")
-public class TabCadastroExerciciosController {
+public class TabCadastrosController {
 
-	private String txUrlTela = TagConstants.TAG_TEMPLATE_CADASTROS + "exercicios";
+	private String txUrlTela = TagConstants.TAG_TEMPLATE_CADASTROS + "cadastros";
 
 	@GetMapping
 	public ModelAndView novo(HttpServletRequest request) {

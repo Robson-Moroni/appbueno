@@ -1,6 +1,10 @@
 Manifest-Version: 1.0
-Build-Jdk-Spec: 16
-Implementation-Title: apptreino
-Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Rubens
+Build-Jdk: 16.0.2
+Implementation-Title: amalog
+Implementation-Version: 1.0.0-SNAPSHOT
+Implementation-Vendor-Id: br.com.jtpsolution
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: https://projects.spring.io/spring-boot/amalog/
 Created-By: Maven Integration for Eclipse
 
