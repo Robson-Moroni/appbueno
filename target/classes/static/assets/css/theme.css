@@ -7,7 +7,7 @@
 
 
 .nav-pills .nav-link {
-	border-radius: 25px !important;
+	border-radius: 1.563rem !important;
 }
 
 .card-header {
@@ -17,7 +17,22 @@
 .btn-pill-white {
 	background-color: #FFF;
 	color: #0065FF;
-	border-radius: 25px;
+	border-radius: 1.563rem;
 	padding-top: 0.313rem;
 	padding-bottom: 0.313rem;
+}
+
+.modal-content {
+	border-radius: 1.25rem !important;
+	border: 0 !important;
+	padding: 0.625rem !important;
+}
+
+.modal .modal-header .close {
+  color: #FF3636;
+  text-shadow: none;
+}
+
+.modal-footer {
+	border: 0!important;
 }

@@ -12,6 +12,11 @@ a {
 }
 
 
+/* Colors */
+.blue {
+	color: #0065FF !important;
+}
+
 /* Fonts */
 .font-size-12px {
 	font-size: 0.75rem !important;
