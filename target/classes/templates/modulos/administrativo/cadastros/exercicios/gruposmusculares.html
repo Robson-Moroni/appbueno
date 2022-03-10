@@ -3,49 +3,127 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div th:fragment="gruposmusculares">
-		<div class="card br-full-15px">
-			<div class="card-header br-top-15px text-white">
-				<div class="row">
-					<div class="col-sm-9 font-size-18px" style="font-weight: 600;">
-						Grupos Musculares
+	<div class="card br-full-15px">
+		<div class="card-header br-top-15px text-white">
+			<div class="row">
+				<div class="col-sm-9 font-size-18px" style="font-weight: 600;">
+					Grupos Musculares
+				</div>
+				<div class="col-sm-3 font-size-12px text-center">
+					<div class="btn-pill-white" style="font-weight: 600;" data-bs-toggle="modal"
+						data-bs-target="#modalGrupoMuscular">Novo</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-body"
+			style="padding-left: 0; padding-right: 0; padding-top: 0.313rem; padding-bottom: 0.938rem;">
+			<table id="gruposMuscularesTable" class="display" style="width:100%">
+				<thead style="background-color: #F3F3F3; color: #0065FF">
+					<tr>
+						<th style="padding-left: 0.625rem">Nome do Grupo</th>
+						<th>Descrição</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="padding-left: 0.625rem">Bíceps</td>
+						<td>Região do Bíceps</td>
+					</tr>
+					<tr>
+						<td style="padding-left: 0.625rem">Tríceps</td>
+						<td>Região do Tríceps</td>
+					</tr>
+					<tr>
+						<td style="padding-left: 0.625rem">Peitoral</td>
+						<td>Região do Peitoral</td>
+					</tr>
+					<tr>
+						<td style="padding-left: 0.625rem">Oblíquos</td>
+						<td>Região dos Oblíquos</td>
+					</tr>
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<form>
+		<div class="modal fade" id="modalGrupoMuscular" tabindex="-1" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg">
+				<div class="modal-content">
+
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-11 font-size-18px blue" style="font-weight: 600;">
+								Cadastro de Grupo Muscular
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+						</div>
+						<div class="row">
+
+							<input type="hidden"></input> <!-- Hidden ID -->
+
+
+							<div class="col-sm-4" id="divtxNomeGrupo">
+								<div class="form-group">
+									<label for="txNomeGrupo">Nome do Grupo</label>
+									<input type="text" class="form-control" id="txNomeGrupo" name="txNomeGrupo" />
+								</div>
+							</div>
+
+							<div class="col-sm-4" id="divtxDescricaoGrupo">
+								<div class="form-group">
+									<label for="txDescricaoGrupo">Descrição do Grupo</label>
+									<input type="text" class="form-control" id="txDescricaoGrupo"
+										name="txDescricaoGrupo" />
+								</div>
+							</div>
+
+							<div class="col-sm-4" id="divimgDemonstrativa">
+								<div class="form-group">
+									<label for="imgDemonstrativa">Imagem Demonstrativa</label>
+									<input class="form-control" type="file" id="imgDemonstrativa"
+										name="imgDemonstrativa" />
+								</div>
+							</div>
+
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-sm-11 font-size-15px blue" style="font-weight: 600;">
+								Divisões Pertencentes
+							</div>
+
+
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-sm-11 font-size-15px blue" style="font-weight: 600;">
+								Conjuntos Pertencentes
+							</div>
+
+
+						</div>
+
 					</div>
-					<div class="col-sm-3 font-size-12px text-center">
-						<a href="#">
-							<div class="btn-pill-white" style="font-weight: 600;">Novo</div>
-						</a>
+
+
+					<div class="modal-footer">
+						<div class="col-sm-12 text-center">
+							<button type="button" class="btn btn-primary col-sm-6"
+								style="border-radius:10px">Gravar</button>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="card-body" style="padding-left: 0; padding-right: 0; padding-top: 0.313rem; padding-bottom: 0.938rem;">
-				<table id="gruposMuscularesTable" class="display" style="width:100%">
-					<thead style="background-color: #F3F3F3; color: #0065FF">
-						<tr>
-							<th style="padding-left: 0.625rem">Nome do Grupo</th>
-							<th>Descrição</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td style="padding-left: 0.625rem">Bíceps</td>
-							<td>Região do Bíceps</td>
-						</tr>
-						<tr>
-							<td style="padding-left: 0.625rem">Tríceps</td>
-							<td>Região do Tríceps</td>
-						</tr>
-						<tr>
-							<td style="padding-left: 0.625rem">Peitoral</td>
-							<td>Região do Peitoral</td>
-						</tr>
-						<tr>
-							<td style="padding-left: 0.625rem">Oblíquos</td>
-							<td>Região dos Oblíquos</td>
-						</tr>
-					</tbody>
-					
-				</table>
-			</div>
 		</div>
+	</form>
+
 </div>
 
 </html>
