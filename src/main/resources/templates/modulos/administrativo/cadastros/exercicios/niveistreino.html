@@ -44,7 +44,7 @@
 	</div>
 
 	<!-- Modal -->
-	<form>
+	<form id="tabNivelTreinoObj" th:object="${tabNivelTreinoObj}" th:action="@{/cadastro/gravar/nivelTreino}" th:method="POST"   >
 		<div class="modal fade" id="modalNivelTreino" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-lg">
 				<div class="modal-content">
@@ -62,19 +62,19 @@
 						
 						<div class="row" style="margin-top: 0.313rem">
 
-							<input type="hidden"></input> <!-- Hidden ID -->
+							<input type="hidden" id="cdNivelTreino" th:value="*{cdNivelTreino}"></input> <!-- Hidden ID -->
 
 							<div class="col-sm-4" id="divtxNomeNivelTreino">
 								<div class="form-group">
-									<label for="txNomeNivelTreino" class="font-size-16px font-semibold">Nome do Nível de Treino</label>
-									<input type="text" class="form-control" id="txNomeNivelTreino" name="txNomeNivelTreino" />
+									<label for="txNivelTreino" class="font-size-16px font-semibold">Nome do Nível de Treino</label>
+									<input type="text" class="form-control" id="txNivelTreino" name="txNivelTreino" th:field="*{txNivelTreino}" />
 								</div>
 							</div>
 							
 							<div class="col-sm-5" id="divtxDescricaoNivelTreino">
 								<div class="form-group">
-									<label for="txDescricaoNivelTreino" class="font-size-16px font-semibold">Descrição do Nível de Treino</label>
-									<input type="text" class="form-control" id="txDescricaoNivelTreino" name="txDescricaoNivelTreino" />
+									<label for="dsNivelTreino" class="font-size-16px font-semibold">Descrição do Nível de Treino</label>
+									<input type="text" class="form-control" id="dsNivelTreino" name="dsNivelTreino"  th:field="*{dsNivelTreino}"/>
 								</div>
 							</div>
 							
@@ -85,8 +85,7 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<button type="button" class="btn btn-primary col-sm-6"
-								style="border-radius:10px">Gravar</button>
+							<button type="submit" class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</button>
 						</div>
 					</div>
 				</div>

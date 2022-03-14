@@ -15,7 +15,7 @@ public class TabNivelTreinoObj {
     @Id
     @GeneratedValue
     @Column(name = "cd_nivel_treino")
-    private Integer cdGrupoMuscular;
+    private Integer cdNivelTreino;
 
 
     @Column(name = "tx_nivel_treino")
