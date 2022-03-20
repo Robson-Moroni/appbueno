@@ -6,3 +6,6 @@
 
 /* Theme */
 @import "theme.css";
+
+/* Loading Spinner */
+@import "loading.css";

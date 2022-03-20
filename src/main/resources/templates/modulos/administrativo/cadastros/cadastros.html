@@ -36,7 +36,7 @@
 				<div class="row">
 					<div class="col-sm-4" style="margin-left: -0.813rem"><div th:replace="modulos/administrativo/cadastros/exercicios/divisoes :: divisoes"></div></div>
 					<div class="col-sm-4" style="margin-left: 0.406rem"><div th:replace="modulos/administrativo/cadastros/exercicios/gruposmusculares :: gruposmusculares"></div></div>
-					<div class="col-sm-4" style="margin-left: 0.406rem"><div th:replace="modulos/administrativo/cadastros/exercicios/niveistreino :: niveistreino"></div></div>
+					<div class="col-sm-4" style="margin-left: 0.406rem" id="niveisTreino"></div>
 				</div>
 				<!--<div class="row" style="margin-top: 20px">
 					<div class="col-sm-6" style="margin-left: -0.813rem"><div th:replace="modulos/administrativo/cadastros/exercicios/divisoes :: divisoes"></div></div>
@@ -52,6 +52,11 @@
 		</div>
 		</div>
 	</div>
-</section>
 
+	<script>
+		$(document).ready(function () {
+			loadPage('niveisTreino', '/cadastro/carregarListas/listarNivelTreino');
+		});
+	</script>
+</section>
 </html>

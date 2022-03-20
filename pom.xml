@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.jtpsolution</groupId>
-	<artifactId>amalog</artifactId>
+	<artifactId>appBueno</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>amalog</name>
-	<description>Amalog</description>
+	<name>appBueno</name>
+	<description>appBueno</description>
 
 	<properties>
 		<java.version>1.8</java.version>

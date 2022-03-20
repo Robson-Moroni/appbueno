@@ -10,8 +10,9 @@
 					Níveis de Treino
 				</div>
 				<div class="col-sm-3 font-size-12px text-center">
-					<div class="btn-pill-white" style="font-weight: 600;" data-bs-toggle="modal"
-						data-bs-target="#modalNivelTreino">Novo</div>
+					<a href="javascript: abrirModal('modalNivelTreino')">
+						<div class="btn-pill-white" style="font-weight: 600;">Novo</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -25,17 +26,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="padding-left: 0.625rem">Iniciante</td>
-						<td>Nível de iniciantes</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Intermediário</td>
-						<td>Nível de intermediários</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Avançado</td>
-						<td>Nível de avançados</td>
+					<tr th:each="listNivelTreino : ${listNivelTreino}">
+						<td style="padding-left: 0.625rem" th:text="${listNivelTreino.txNivelTreino}"> txNivelTreino </td>
+						<td class="blue" th:text="${listNivelTreino.dsNivelTreino}"> dsNivelTreino </td>
 					</tr>
 				</tbody>
 
@@ -85,7 +78,7 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<button type="submit" class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</button>
+							<a href="javascript: gravarModalCadastro('modalNivelTreino', 'tabNivelTreinoObj', '/cadastro/gravar/nivelTreino', 'niveistreinoTable')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 						</div>
 					</div>
 				</div>
@@ -94,5 +87,4 @@
 	</form>
 
 </div>
-
 </html>
