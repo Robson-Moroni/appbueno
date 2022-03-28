@@ -8,103 +8,175 @@ import com.sistema.apptreino.dao.TabGrupoMuscularObj;
 import com.sistema.apptreino.dao.TabNivelTreinoObj;
 import com.sistema.apptreino.dao.bean.TabRetornoBean;
 import com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.TabDivisaoService;
+import com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.TabGrupoMuscularService;
 import com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.TabNivelTreinoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sistema.apptreino.TagConstants;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+@EnableAsync
 @Controller
 @RequestMapping("/cadastro")
 public class TabCadastrosController {
 
 
-	@Autowired
-	TabDivisaoService tabDivisaoService;
+    @Autowired
+    TabDivisaoService tabDivisaoService;
 
-	@Autowired
-	TabNivelTreinoService tabNivelTreinoService;
+    @Autowired
+    TabNivelTreinoService tabNivelTreinoService;
 
-
-	private String txUrlTela = TagConstants.TAG_TEMPLATE_CADASTROS + "cadastros";
-
-	@GetMapping
-	public ModelAndView novo(HttpServletRequest request) {
-
-		ModelAndView mv = new ModelAndView(txUrlTela);
-		carregarNovasInstancias(mv);
-		carregarListas(mv);
-		return mv;
-	}
-
-	private void carregarNovasInstancias(ModelAndView mv) {
-		mv.addObject(new TabDivisaoObj());
-		mv.addObject(new TabNivelTreinoObj());
-		mv.addObject(new TabGrupoMuscularObj());
-		mv.addObject(new TabConjuntoGrupoMuscularObj());
-
-	}
-
-	private void carregarListas(ModelAndView mv) {
-		mv.addObject("listDivisao", tabDivisaoService.listar());
-	}
+    @Autowired
+    TabGrupoMuscularService tabGrupoMuscularService;
 
 
+    private String txUrlTela = TagConstants.TAG_TEMPLATE_CADASTROS;
 
-/*	@PostMapping("/gravar/nivelTreino")
-	public ModelAndView gravarNivelTreino(@Validated TabNivelTreinoObj tabNivelTreinoObj, HttpServletRequest httpServletRequest, Errors errors){
-		ModelAndView mv = new ModelAndView(txUrlTela);
+    @GetMapping
+    public ModelAndView novo(HttpServletRequest request) {
 
-		tabNivelTreinoService.gravar(tabNivelTreinoObj);
-		return mv;
-	}*/
+        ModelAndView mv = new ModelAndView(txUrlTela + "cadastros");
+        return mv;
+    }
 
-	@GetMapping("/carregarListas/listarNivelTreino")
-	public ModelAndView listarNivelTreino(){
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("listNivelTreino", tabNivelTreinoService.listar());
-		return mv;
-	}
+    private void carregarNovasInstancias(ModelAndView mv, String element) {
 
-	@PostMapping("/gravar/nivelTreino")
-	public @ResponseBody List<?> gravarNivelTreino(@Validated TabNivelTreinoObj tabNivelTreinoObj, HttpServletRequest httpServletRequest, Errors erros){
-		List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
-		try {
-			tabNivelTreinoService.gravar(tabNivelTreinoObj);
-			List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
-			TabRetornoBean sucesso = new TabRetornoBean();
-			sucesso.setCdStatus(1);
-			sucesso.setTxEndPointRetorno("/cadastro/carregarListas/listarNivelTreino");
-			success.add(sucesso);
-			return success;
+        switch (element) {
+            case "Divisao":
+                mv.addObject(new TabDivisaoObj());
+                break;
+            case "NivelTreino":
+                mv.addObject(new TabNivelTreinoObj());
+                break;
+            case "GrupoMuscular":
+                mv.addObject(new TabGrupoMuscularObj());
+                break;
+            case "ConjuntoGrupoMuscular":
+                mv.addObject(new TabConjuntoGrupoMuscularObj());
+                break;
+        }
+    }
 
-		}
-		catch (Exception ex) {
-			TabRetornoBean erro = new TabRetornoBean();
-			erro.setCdStatus(0);
-			error.add(erro);
-			return error;
-		}
-	}
+    private void carregarListDados(ModelAndView mv, String element) {
 
-	@PostMapping("/gravar/divisao")
-	public ModelAndView gravarDivisao(@Validated TabDivisaoObj tabDivisaoObj, HttpServletRequest httpServletRequest, Errors errors){
-		ModelAndView mv = new ModelAndView(txUrlTela);
+        switch (element) {
+            case "Divisao":
+                mv.addObject("list" + element, tabDivisaoService.listar());
+                break;
+            case "NivelTreino":
+                mv.addObject("list" + element, tabNivelTreinoService.listar());
+                break;
 
-		tabDivisaoService.gravar(tabDivisaoObj);
+            case "GrupoMuscular":
+                mv.addObject("list" + element, tabGrupoMuscularService.listar());
+                break;
+        }
 
-		return mv;
-	}
+    }
+
+
+    @GetMapping("/listar/{element}")
+    public ModelAndView listarNivelTreino(@PathVariable String element) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        ModelAndView mv = new ModelAndView(txUrlTela + "exercicios/" + element);
+
+        carregarNovasInstancias(mv, element);
+        carregarListDados(mv, element);
+        return mv;
+    }
+
+
+    @PostMapping("/gravar/nivelTreino")
+    public @ResponseBody
+    List<?> gravarNivelTreino(@Validated TabNivelTreinoObj tabNivelTreinoObj, HttpServletRequest httpServletRequest, Errors erros) {
+        List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
+        try {
+            tabNivelTreinoService.gravar(tabNivelTreinoObj);
+            List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
+            TabRetornoBean sucesso = new TabRetornoBean();
+            sucesso.setCdStatus(1);
+            sucesso.setTxEndPointRetorno("/cadastro/listar/NivelTreino");
+            success.add(sucesso);
+            return success;
+
+        } catch (Exception ex) {
+            TabRetornoBean erro = new TabRetornoBean();
+            erro.setCdStatus(0);
+            error.add(erro);
+            return error;
+        }
+    }
+
+
+    @PostMapping("/gravar/divisao")
+    public @ResponseBody
+    List<?> gravarDivisao(@Validated TabDivisaoObj tabDivisaoObj, HttpServletRequest httpServletRequest, Errors erros) {
+        List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
+        try {
+            tabDivisaoService.gravar(tabDivisaoObj);
+            List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
+            TabRetornoBean sucesso = new TabRetornoBean();
+            sucesso.setCdStatus(1);
+            sucesso.setTxEndPointRetorno("/cadastro/listar/Divisao");
+            success.add(sucesso);
+            return success;
+
+        } catch (Exception ex) {
+            TabRetornoBean erro = new TabRetornoBean();
+            erro.setCdStatus(0);
+            error.add(erro);
+            return error;
+        }
+    }
+
+
+    @PostMapping("/gravar/grupoMuscular")
+    public @ResponseBody
+    List<?> gravarGrupoMuscular(@Validated TabGrupoMuscularObj tabGrupoMuscularObj, HttpServletRequest httpServletRequest, Errors erros) {
+        List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
+        try {
+            tabGrupoMuscularService.gravar(tabGrupoMuscularObj);
+            List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
+            TabRetornoBean sucesso = new TabRetornoBean();
+            sucesso.setCdStatus(1);
+            sucesso.setTxEndPointRetorno("/cadastro/listar/GrupoMuscular");
+            success.add(sucesso);
+            return success;
+
+        } catch (Exception ex) {
+            TabRetornoBean erro = new TabRetornoBean();
+            erro.setCdStatus(0);
+            error.add(erro);
+            return error;
+        }
+    }
+
+
+    //	@GetMapping("/listar/{element}")
+//	public ModelAndView listarNivelTreino(@PathVariable String element) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+//		ModelAndView mv = new ModelAndView(txUrlTela + "exercicios/" + element );
+//
+//		String service = "modulos.administrador.cadastros.exercicios.service.Tab" + element + "Service";
+//		String obj = "dao.Tab" + element + "Obj";
+//
+//		RequestReflection reflectionService = new RequestReflection(service);
+//		reflectionService.requestMethod("listar");
+//
+//		Object list = reflectionService.invocarMetodo();
+//
+//		carregarNovasInstancias(mv);
+//		mv.addObject("list"+element, list);
+//		return mv;
+//	}
+
 
 }

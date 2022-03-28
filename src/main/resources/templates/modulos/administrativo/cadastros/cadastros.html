@@ -34,14 +34,10 @@
 			<!-- Exercícios -->
 				<div class="tab-pane fade show active" id="pills-exercicios" role="tabpanel" aria-labelledby="pills-exercicios-tab">
 				<div class="row">
-					<div class="col-sm-4" style="margin-left: -0.813rem"><div th:replace="modulos/administrativo/cadastros/exercicios/divisoes :: divisoes"></div></div>
-					<div class="col-sm-4" style="margin-left: 0.406rem"><div th:replace="modulos/administrativo/cadastros/exercicios/gruposmusculares :: gruposmusculares"></div></div>
+					<div class="col-sm-4" style="margin-left: -0.813rem" id="grupoMuscular"></div>
+					<div class="col-sm-4" style="margin-left: 0.406rem" id="divisao"></div>
 					<div class="col-sm-4" style="margin-left: 0.406rem" id="niveisTreino"></div>
 				</div>
-				<!--<div class="row" style="margin-top: 20px">
-					<div class="col-sm-6" style="margin-left: -0.813rem"><div th:replace="modulos/administrativo/cadastros/exercicios/divisoes :: divisoes"></div></div>
-					<div class="col-sm-6"><div th:replace="modulos/administrativo/cadastros/exercicios/gruposmusculares :: gruposmusculares"></div></div>
-				</div>-->
 				</div>
 			<!-- Fim Exercícios -->
 			
@@ -55,7 +51,11 @@
 
 	<script>
 		$(document).ready(function () {
-			loadPage('niveisTreino', '/cadastro/carregarListas/listarNivelTreino');
+
+			loadPage('niveisTreino', '/cadastro/listar/NivelTreino');
+			loadPage('divisao', '/cadastro/listar/Divisao');
+			loadPage('grupoMuscular', '/cadastro/listar/GrupoMuscular;Divisao;Conjunto');
+
 		});
 	</script>
 </section>

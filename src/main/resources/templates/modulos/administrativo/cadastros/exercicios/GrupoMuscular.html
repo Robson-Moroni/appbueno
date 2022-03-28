@@ -25,21 +25,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="padding-left: 0.625rem">Bíceps</td>
-						<td>Região do Bíceps</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Tríceps</td>
-						<td>Região do Tríceps</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Peitoral</td>
-						<td>Região do Peitoral</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Oblíquos</td>
-						<td>Região dos Oblíquos</td>
+					<tr th:each="list : ${listGrupoMuscular}">
+						<td th:text="${list.txGrupoMuscular}" style="padding-left: 0.625rem"></td>
+						<td th:text="${list.dsGrupoMuscular}"></td>
 					</tr>
 				</tbody>
 
@@ -48,7 +36,7 @@
 	</div>
 
 	<!-- Modal -->
-	<form>
+	<form id="tabGrupoMuscularObj" th:object="${tabGrupoMuscularObj}" th:action="@{/cadastro/gravar/grupoMuscular}"  th:method="POST">
 		<div class="modal fade" id="modalGrupoMuscular" tabindex="-1" aria-labelledby="exampleModalLabel"
 			aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-lg">
@@ -69,18 +57,18 @@
 							<input type="hidden"></input> <!-- Hidden ID -->
 
 
-							<div class="col-sm-4" id="divtxNomeGrupo">
+							<div class="col-sm-4" id="divtxGrupoMuscular">
 								<div class="form-group">
-									<label for="txNomeGrupo">Nome do Grupo</label>
-									<input type="text" class="form-control" id="txNomeGrupo" name="txNomeGrupo" />
+									<label for="txGrupoMuscular">Nome do Grupo</label>
+									<input type="text" class="form-control" id="txGrupoMuscular" name="txGrupoMuscular" th:field="*{txGrupoMuscular}" />
 								</div>
 							</div>
 
-							<div class="col-sm-4" id="divtxDescricaoGrupo">
+							<div class="col-sm-4" id="divdsGrupoMuscular">
 								<div class="form-group">
-									<label for="txDescricaoGrupo">Descrição do Grupo</label>
-									<input type="text" class="form-control" id="txDescricaoGrupo"
-										name="txDescricaoGrupo" />
+									<label for="dsGrupoMuscular">Descrição do Grupo</label>
+									<input type="text" class="form-control" id="dsGrupoMuscular"
+										name="dsGrupoMuscular" th:field="*{dsGrupoMuscular}" />
 								</div>
 							</div>
 
@@ -115,8 +103,7 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<button type="button" class="btn btn-primary col-sm-6"
-								style="border-radius:10px">Gravar</button>
+							<a href="javascript: gravarModalCadastro('modalGrupoMuscular', 'tabGrupoMuscularObj', '/cadastro/gravar/grupoMuscular', 'grupoMuscular')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 						</div>
 					</div>
 				</div>

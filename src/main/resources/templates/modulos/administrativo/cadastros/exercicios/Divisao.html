@@ -27,33 +27,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-A</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-B</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-C</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-D</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-E</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-F</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-G</td>
+					<tr th:each="list : ${listDivisao}">
+						<td th:text="${list.txSexoDivisao}" style="padding-left: 0.625rem"></td>
+						<td th:text="${list.sgDivisao}">M-A</td>
 					</tr>
 				</tbody>
 
@@ -63,7 +39,7 @@
 
 
 	<!-- Modal -->
-	<form>
+	<form id="tabDivisaoObj" th:object="${tabDivisaoObj}" th:action="@{/cadastro/gravar/divisao}" th:method="POST" >
 	<div class="modal fade" id="modalDivisao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
@@ -81,13 +57,13 @@
 					
 					<input type="hidden"></input> <!-- Hidden ID -->
 					
-						<div class="col-sm-6" id="divtxSexo">
+						<div class="col-sm-6" id="divttxSexoDivisao">
 							<div class="form-group">
-								<label for="txSigla">Sexo</label>
-								<select class="form-select" id="tabFreehandObj">
+								<label for="txSexoDivisao">Sexo</label>
+								<select class="form-select" id="txSexoDivisao" th:field="*{txSexoDivisao}">
 									<option value="">Selecione o Sexo</option>
-									<option value="1">Feminino</option>
-									<option value="2">Masculino</option>
+									<option value="FEMININO">Feminino</option>
+									<option value="MASCULINO">Masculino</option>
 								</select>
 							</div>
 						</div>
@@ -95,10 +71,10 @@
 
 
 
-						<div class="col-sm-6" id="divtxSigla">
+						<div class="col-sm-6" id="divsgDivisao">
 							<div class="form-group">
-								<label for="txSigla">Sigla</label>
-								<input type="text" class="form-control" id="txSigla" name="txSigla" />
+								<label for="sgDivisao">Sigla</label>
+								<input type="text" class="form-control" id="sgDivisao" name="sgDivisao" th:field="*{sgDivisao}" />
 							</div>
 						</div>
 					</div>
@@ -108,7 +84,7 @@
 
 				<div class="modal-footer">
 					<div class="col-sm-12 text-center">
-					<button type="button" class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</button>
+						<a href="javascript: gravarModalCadastro('modalDivisao', 'tabDivisaoObj', '/cadastro/gravar/divisao', 'divisao')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 					</div>
 				</div>
 			</div>

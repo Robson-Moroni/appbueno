@@ -37,7 +37,7 @@
 	</div>
 
 	<!-- Modal -->
-	<form id="tabNivelTreinoObj" th:object="${tabNivelTreinoObj}" th:action="@{/cadastro/gravar/nivelTreino}" th:method="POST"   >
+	<form id="tabNivelTreinoObj" th:object="${tabNivelTreinoObj}" th:action="@{/cadastro/gravar/nivelTreino}" th:method="POST">
 		<div class="modal fade" id="modalNivelTreino" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-lg">
 				<div class="modal-content">
@@ -49,10 +49,10 @@
 							</div>
 							<div class="col-sm-1">
 								<button type="button" class="btn-close" data-bs-dismiss="modal"
-									aria-label="Close"></button>
+										aria-label="Close"></button>
 							</div>
 						</div>
-						
+
 						<div class="row" style="margin-top: 0.313rem">
 
 							<input type="hidden" id="cdNivelTreino" th:value="*{cdNivelTreino}"></input> <!-- Hidden ID -->
@@ -63,14 +63,14 @@
 									<input type="text" class="form-control" id="txNivelTreino" name="txNivelTreino" th:field="*{txNivelTreino}" />
 								</div>
 							</div>
-							
+
 							<div class="col-sm-5" id="divtxDescricaoNivelTreino">
 								<div class="form-group">
 									<label for="dsNivelTreino" class="font-size-16px font-semibold">Descrição do Nível de Treino</label>
 									<input type="text" class="form-control" id="dsNivelTreino" name="dsNivelTreino"  th:field="*{dsNivelTreino}"/>
 								</div>
 							</div>
-							
+
 						</div>
 
 					</div>
@@ -78,7 +78,7 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<a href="javascript: gravarModalCadastro('modalNivelTreino', 'tabNivelTreinoObj', '/cadastro/gravar/nivelTreino', 'niveistreinoTable')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
+							<a href="javascript: gravarModalCadastro('modalNivelTreino', 'tabNivelTreinoObj', '/cadastro/gravar/nivelTreino', 'niveisTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 						</div>
 					</div>
 				</div>
