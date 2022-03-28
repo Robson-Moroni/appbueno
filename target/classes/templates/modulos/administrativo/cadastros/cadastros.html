@@ -34,24 +34,39 @@
 			<!-- Exercícios -->
 				<div class="tab-pane fade show active" id="pills-exercicios" role="tabpanel" aria-labelledby="pills-exercicios-tab">
 				<div class="row">
-					<div class="col-sm-4" style="margin-left: -0.813rem"><div th:replace="modulos/administrativo/cadastros/exercicios/divisoes :: divisoes"></div></div>
-					<div class="col-sm-4" style="margin-left: 0.406rem"><div th:replace="modulos/administrativo/cadastros/exercicios/gruposmusculares :: gruposmusculares"></div></div>
-					<div class="col-sm-4" style="margin-left: 0.406rem"><div th:replace="modulos/administrativo/cadastros/exercicios/niveistreino :: niveistreino"></div></div>
+					<div class="col-sm-4" style="margin-left: -0.813rem" id="divisoesTreino"></div>
+					<div class="col-sm-4" style="margin-left: 0.406rem" id="gruposMusculares"></div>
+					<div class="col-sm-4" style="margin-left: 0.406rem" id="niveisTreino"></div>
 				</div>
-				<!--<div class="row" style="margin-top: 20px">
-					<div class="col-sm-6" style="margin-left: -0.813rem"><div th:replace="modulos/administrativo/cadastros/exercicios/divisoes :: divisoes"></div></div>
-					<div class="col-sm-6"><div th:replace="modulos/administrativo/cadastros/exercicios/gruposmusculares :: gruposmusculares"></div></div>
-				</div>-->
+				<div class="row" style="margin-top: 20px">
+					<div class="col-sm-6" style="margin-left: -0.813rem" id="exerciciosTreino"></div>
+					<div class="col-sm-6" id="seriesTreino"></div>
+
+				</div>
 				</div>
 			<!-- Fim Exercícios -->
 			
 			<!-- Suporte -->
-				<div class="tab-pane fade" id="pills-suporte" role="tabpanel" aria-labelledby="pills-suporte-tab">Suporte</div>
+			<div class="tab-pane fade" id="pills-suporte" role="tabpanel" aria-labelledby="pills-suporte-tab">
+			<div class="row">
+				<div class="col-sm-4" style="margin-left: -0.813rem" id="suporteCategoria"></div>
+			</div>
+			</div>
 			<!-- Fim Suporte -->
 			
 		</div>
 		</div>
 	</div>
-</section>
 
+	<script>
+		$(document).ready(function () {
+			loadPage('divisoesTreino', '/cadastro/divisoesTreino/listar');
+			loadPage('gruposMusculares', '/cadastro/gruposMusculares/listar');
+			loadPage('niveisTreino', '/cadastro/nivelTreino/listar');
+			loadPage('exerciciosTreino','/cadastro/exerciciosTreino/listar');
+			loadPage('seriesTreino','/cadastro/seriesTreino/listar');
+			loadPage('suporteCategoria', '/cadastro/suporteCategoria/listar');
+		});
+	</script>
+</section>
 </html>

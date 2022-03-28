@@ -17,6 +17,9 @@ public class TabSerieObj {
     @Column(name = "cd_serie")
     private Integer cdSerie;
 
+    @ManyToOne
+    @JoinColumn(name = "cd_nivel_treino")
+    private TabNivelTreinoObj tabNivelTreinoObj;
 
     @Column(name = "qt_exercicios_dia_serie")
     private Integer qtExerciciosDiaSerie;

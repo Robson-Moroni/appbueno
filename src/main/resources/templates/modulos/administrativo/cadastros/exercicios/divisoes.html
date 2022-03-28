@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<div th:fragment="divisoes">
 	<div class="card br-full-15px">
 		<div class="card-header br-top-15px text-white">
 			<div class="row">
@@ -11,8 +10,9 @@
 				</div>
 				<div class="col-sm-3 font-size-12px text-center">
 
-					<div class="btn-pill-white" style="font-weight: 600;" data-bs-toggle="modal"
-						data-bs-target="#modalDivisao">Novo</div>
+					<a href="javascript: abrirModal('modalDivisao');">
+						<div class="btn-pill-white" style="font-weight: 600;">Novo</div>
+					</a>
 
 				</div>
 			</div>
@@ -27,34 +27,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-A</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-B</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-C</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-D</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-E</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-F</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Masculino</td>
-						<td>M-G</td>
-					</tr>
+				<tr th:each="listDivisao : ${listDivisao}">
+					<td style="padding-left: 0.625rem" th:text="${listDivisao.sgSexoDivisao}" th:onclick="|consultarItemCadastro('modalSerie', '@{/cadastro/nivelTreino/consultar}/${listDivisao.cdDivisao}')|"> sgSexoDivisao </td>
+					<td class="blue" th:text="${listDivisao.sgDivisao}"> sgDivisao </td>
+				</tr>
 				</tbody>
 
 			</table>
@@ -63,7 +39,7 @@
 
 
 	<!-- Modal -->
-	<form>
+	<form id="tabDivisaoObj" th:object="${tabDivisaoObj}" th:action="@{/cadastro/gravar/nivelTreino}" th:method="POST">
 	<div class="modal fade" id="modalDivisao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
@@ -108,7 +84,7 @@
 
 				<div class="modal-footer">
 					<div class="col-sm-12 text-center">
-					<button type="button" class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</button>
+						<a href="javascript: gravarModalCadastro('modalDivisao', 'tabDivisaoObj', '/cadastro/divisaoTreino/gravar', 'divisoesTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 					</div>
 				</div>
 			</div>
@@ -116,7 +92,22 @@
 	</div>
 	</form>
 
+	<script th:inline="javascript">
+		/*<![CDATA[*/
 
-</div>
+		$(document).ready(function () {
+			$('#divisoesTable').DataTable(
+					{
+						"searching": false,
+						"lengthChange": false,
+						"ordering": false,
+						"bInfo": false,
+						"pageLength": 3
+					}
+			);
+		});
+
+		/*]]>*/
+	</script>
 
 </html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<div class="card br-full-15px">
+		<div class="card-header br-top-15px text-white">
+			<div class="row">
+				<div class="col-sm-9 font-size-18px" style="font-weight: 600;">
+					Categorias
+				</div>
+				<div class="col-sm-3 font-size-12px text-center">
+
+					<a href="javascript: abrirModal('modalCategoria');">
+						<div class="btn-pill-white" style="font-weight: 600;">Novo</div>
+					</a>
+
+				</div>
+			</div>
+		</div>
+		<div class="card-body"
+			style="padding-left: 0; padding-right: 0; padding-top: 0.313rem; padding-bottom: 0.938rem;">
+			<table id="suporteCategoriaTable" class="display" style="width:100%">
+				<thead style="background-color: #F3F3F3; color: #0065FF">
+					<tr>
+						<th style="padding-left: 0.625rem">Nome da Categoria</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:each="listSuporteCategoria : ${listSuporteCategoria}">
+					<td style="padding-left: 0.625rem" th:text="${listSuporteCategoria.txCategoria}" th:onclick="|consultarItemCadastro('modalSerie', '@{/cadastro/suporteCategoria/consultar}/${listSuporteCategoria.cdCategoria}')|"> cdCategoria </td>
+				</tr>
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+
+
+	<!-- Modal -->
+	<form id="tabSuporteCategoriaObj" th:object="${tabSuporteCategoriaObj}" th:action="@{/cadastro/suporteCategoria/gravar}" th:method="POST">
+	<div class="modal fade" id="modalCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-11 font-size-18px blue" style="font-weight: 600;">
+							Cadastro de Categorias
+						</div>
+						<div class="col-sm-1">
+						 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+					</div>
+					<div class="row">
+					
+					<input type="hidden" th:field="*{cdCategoria}"></input> <!-- Hidden ID -->
+
+						<div class="col-sm-12" id="divtxCategoria">
+							<div class="form-group">
+								<label for="txCategoria">Categoria</label>
+								<input type="text" class="form-control" id="txCategoria" name="txCategoria" th:field="*{txCategoria}" />
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+				<div class="modal-footer">
+					<div class="col-sm-12 text-center">
+						<a href="javascript: gravarModalCadastro('modalCategoria', 'tabSuporteCategoriaObj', '/cadastro/suporteCategoria/gravar', 'suporteCategoria')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		$(document).ready(function () {
+			$('#suporteCategoriaTable').DataTable(
+					{
+						"searching": false,
+						"lengthChange": false,
+						"ordering": false,
+						"bInfo": false,
+						"pageLength": 3
+					}
+			);
+		});
+
+		/*]]>*/
+	</script>
+
+</html>

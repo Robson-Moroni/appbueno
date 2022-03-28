@@ -35,6 +35,10 @@ a {
 }
 
 /* Font Weight */
+.font-medium {
+	font-weight: 500 !important;
+}
+
 .font-semibold {
 	font-weight: 600 !important;
 }

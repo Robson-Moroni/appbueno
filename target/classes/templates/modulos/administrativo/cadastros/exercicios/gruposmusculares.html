@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<div th:fragment="gruposmusculares">
 	<div class="card br-full-15px">
 		<div class="card-header br-top-15px text-white">
 			<div class="row">
@@ -10,8 +9,9 @@
 					Grupos Musculares
 				</div>
 				<div class="col-sm-3 font-size-12px text-center">
-					<div class="btn-pill-white" style="font-weight: 600;" data-bs-toggle="modal"
-						data-bs-target="#modalGrupoMuscular">Novo</div>
+					<a href="javascript: abrirModal('modalGrupoMuscular');">
+						<div class="btn-pill-white" style="font-weight: 600;">Novo</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -25,22 +25,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td style="padding-left: 0.625rem">Bíceps</td>
-						<td>Região do Bíceps</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Tríceps</td>
-						<td>Região do Tríceps</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Peitoral</td>
-						<td>Região do Peitoral</td>
-					</tr>
-					<tr>
-						<td style="padding-left: 0.625rem">Oblíquos</td>
-						<td>Região dos Oblíquos</td>
-					</tr>
+				<tr th:each="listGrupoMuscular : ${listGrupoMuscular}">
+					<td style="padding-left: 0.625rem" th:text="${listGrupoMuscular.txGrupoMuscular}" th:onclick="|consultarItemCadastro('modalNivelTreino', '@{/cadastro/nivelTreino/consultar}/${listGrupoMuscular.cdGrupoMuscular}')|"> txGrupoMuscular </td>
+					<td class="blue" th:text="${listGrupoMuscular.dsDescricao}"> dsDescricao </td>
+				</tr>
 				</tbody>
 
 			</table>
@@ -115,8 +103,7 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<button type="button" class="btn btn-primary col-sm-6"
-								style="border-radius:10px">Gravar</button>
+							<a href="javascript: gravarModalCadastro('modalGrupoMuscular', 'tabGrupoMuscularesObj', '/cadastro/gravar/divisaoTreino', 'divisoesTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 						</div>
 					</div>
 				</div>
@@ -124,6 +111,22 @@
 		</div>
 	</form>
 
-</div>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		$(document).ready(function () {
+			$('#gruposMuscularesTable').DataTable(
+					{
+						"searching": false,
+						"lengthChange": false,
+						"ordering": false,
+						"bInfo": false,
+						"pageLength": 3
+					}
+			);
+		});
+
+		/*]]>*/
+	</script>
 
 </html>

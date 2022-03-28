@@ -23,6 +23,7 @@ public class TabConjuntoGrupoMuscularObj {
     private TabConjuntoGrupoMuscularObj tabConjuntoObj;
 
 
+    @Column(name = "cd_grupo_muscular")
+    private Integer cdGrupoMuscular;
 
-    
 }

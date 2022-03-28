@@ -1,4 +1,4 @@
-package com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service;
+package com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.exercicios;
 
 import com.sistema.apptreino.dao.TabDivisaoObj;
 import com.sistema.apptreino.dao.repository.TabDivisaoRepository;
