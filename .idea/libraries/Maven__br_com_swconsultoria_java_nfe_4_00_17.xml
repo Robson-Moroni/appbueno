@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: br.com.swconsultoria:java-nfe:4.00.17">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/br/com/swconsultoria/java-nfe/4.00.17/java-nfe-4.00.17.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/br/com/swconsultoria/java-nfe/4.00.17/java-nfe-4.00.17-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/br/com/swconsultoria/java-nfe/4.00.17/java-nfe-4.00.17-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

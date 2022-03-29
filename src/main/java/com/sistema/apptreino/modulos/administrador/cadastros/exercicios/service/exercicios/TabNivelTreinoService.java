@@ -17,13 +17,10 @@ public class TabNivelTreinoService {
     @Autowired
     TabNivelTreinoRepository tabNivelTreinoRepository;
 
+    public List<?> listar(){
+        List<TabNivelTreinoObj>  listResult = tabNivelTreinoRepository.findAll();
 
-
-    public List<TabNivelTreinoObj> listar(){
-        List<TabNivelTreinoObj> listResult = new ArrayList<TabNivelTreinoObj>();
-        listResult = tabNivelTreinoRepository.findAll();
-
-        return listResult;
+        return (listResult.isEmpty() ? new ArrayList<TabNivelTreinoObj>() : listResult);
     }
 
 

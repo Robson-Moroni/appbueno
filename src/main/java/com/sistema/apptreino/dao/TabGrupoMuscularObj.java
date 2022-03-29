@@ -21,8 +21,8 @@ public class TabGrupoMuscularObj {
     @Column(name = "tx_grupo_muscular")
     private String txGrupoMuscular;
 
-    @Column(name = "ds_descricao")
-    private String dsDescricao;
+    @Column(name = "ds_grupo_muscular")
+    private String dsGrupoMuscular;
 
     @Column(name = "tx_caminho_imagem_demonstrativo")
     private String txCaminhoImagemDemonstrativo;

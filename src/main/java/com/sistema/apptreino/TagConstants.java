@@ -10,6 +10,9 @@ public class TagConstants {
 
 	// Constantes relativas aos PATHS Templates Web
 	public static final String TAG_TEMPLATE_CADASTROS = "modulos/administrativo/cadastros/";
-	
+
+	//COnstantes relativas aos package exercicios
+
+	public static final String PACKAGE_EXERCICIOS = "com.sistema.apptreino.";
 
 }
