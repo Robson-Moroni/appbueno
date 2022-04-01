@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<div th:fragment="niveistreino">
 	<div class="card br-full-15px">
 		<div class="card-header br-top-15px text-white">
 			<div class="row">
@@ -10,7 +9,7 @@
 					Níveis de Treino
 				</div>
 				<div class="col-sm-3 font-size-12px text-center">
-					<a href="javascript: abrirModal('modalNivelTreino')">
+					<a href="javascript: loadPage('niveisTreino', '/cadastro/nivelTreino/listar?novo')">
 						<div class="btn-pill-white" style="font-weight: 600;">Novo</div>
 					</a>
 				</div>
@@ -27,7 +26,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="listNivelTreino : ${listNivelTreino}">
-						<td style="padding-left: 0.625rem" th:text="${listNivelTreino.txNivelTreino}"> txNivelTreino </td>
+						<td style="padding-left: 0.625rem" th:text="${listNivelTreino.txNivelTreino}" th:onclick="|consultarItemCadastro('niveisTreino', 'modalNivelTreino', '@{/cadastro/nivelTreino/consultar}/${listNivelTreino.cdNivelTreino}')|"> txNivelTreino </td>
 						<td class="blue" th:text="${listNivelTreino.dsNivelTreino}"> dsNivelTreino </td>
 					</tr>
 				</tbody>
@@ -49,10 +48,10 @@
 							</div>
 							<div class="col-sm-1">
 								<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
+									aria-label="Close"></button>
 							</div>
 						</div>
-
+						
 						<div class="row" style="margin-top: 0.313rem">
 
 							<input type="hidden" id="cdNivelTreino" th:value="*{cdNivelTreino}"></input> <!-- Hidden ID -->
@@ -63,14 +62,14 @@
 									<input type="text" class="form-control" id="txNivelTreino" name="txNivelTreino" th:field="*{txNivelTreino}" />
 								</div>
 							</div>
-
+							
 							<div class="col-sm-5" id="divtxDescricaoNivelTreino">
 								<div class="form-group">
 									<label for="dsNivelTreino" class="font-size-16px font-semibold">Descrição do Nível de Treino</label>
 									<input type="text" class="form-control" id="dsNivelTreino" name="dsNivelTreino"  th:field="*{dsNivelTreino}"/>
 								</div>
 							</div>
-
+							
 						</div>
 
 					</div>
@@ -78,13 +77,33 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<a href="javascript: gravarModalCadastro('modalNivelTreino', 'tabNivelTreinoObj', '/cadastro/gravar/nivelTreino', 'niveisTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
+							<a href="javascript: gravarModalCadastro('modalNivelTreino', 'tabNivelTreinoObj', '/cadastro/nivelTreino/gravar', 'niveisTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
 
-</div>
+		$(document).ready(function () {
+			$('#niveistreinoTable').DataTable(
+					{
+						"searching": false,
+						"lengthChange": false,
+						"ordering": false,
+						"bInfo": false,
+						"pageLength": 3
+					}
+			);
+
+			var modal = /*[[${abrirModal}]]*/null;
+			if(modal != null) {
+				abrirModal(modal);
+			}
+		});
+
+		/*]]>*/
+</script>
 </html>
