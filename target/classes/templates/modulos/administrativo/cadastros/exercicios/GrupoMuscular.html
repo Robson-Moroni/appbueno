@@ -27,7 +27,7 @@
 				<tbody>
 				<tr th:each="listGrupoMuscular : ${listGrupoMuscular}">
 					<td style="padding-left: 0.625rem" th:text="${listGrupoMuscular.txGrupoMuscular}" th:onclick="|consultarItemCadastro('modalNivelTreino', '@{/cadastro/nivelTreino/consultar}/${listGrupoMuscular.cdGrupoMuscular}')|"> txGrupoMuscular </td>
-					<td class="blue" th:text="${listGrupoMuscular.dsDescricao}"> dsDescricao </td>
+					<td class="blue" th:text="${listGrupoMuscular.dsGrupoMuscular}"> dsGrupoMuscular </td>
 				</tr>
 				</tbody>
 

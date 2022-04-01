@@ -18,7 +18,7 @@ public class TabDivisaoObj {
 
 
     @Column(name = "tx_sexo_divisao")
-    private String txSexoDivisao;
+    private String sgSexoDivisao;
 
 
     @Column(name = "sg_divisao")
