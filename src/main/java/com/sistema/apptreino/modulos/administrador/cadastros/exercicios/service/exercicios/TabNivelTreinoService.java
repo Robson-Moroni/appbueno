@@ -17,7 +17,7 @@ public class TabNivelTreinoService {
     @Autowired
     TabNivelTreinoRepository tabNivelTreinoRepository;
 
-    public List<?> listar(){
+    public List<TabNivelTreinoObj> listar(){
         List<TabNivelTreinoObj>  listResult = tabNivelTreinoRepository.findAll();
 
         return (listResult.isEmpty() ? new ArrayList<TabNivelTreinoObj>() : listResult);
