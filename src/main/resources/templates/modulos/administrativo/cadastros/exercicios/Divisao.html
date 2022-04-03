@@ -28,7 +28,7 @@
 				</thead>
 				<tbody>
 				<tr th:each="listDivisao : ${listDivisao}">
-					<td style="padding-left: 0.625rem" th:text="${listDivisao.sgSexoDivisao}" th:onclick="|consultarItemCadastro('modalSerie', '@{/cadastro/nivelTreino/consultar}/${listDivisao.cdDivisao}')|"> sgSexoDivisao </td>
+					<td style="padding-left: 0.625rem" th:text="${listDivisao.sgSexoDivisao}" th:onclick="|consultarItemCadastro('modalSerie', '@{/cadastro/consultar/divisao}/${listDivisao.cdDivisao}')|"> sgSexoDivisao </td>
 					<td class="blue" th:text="${listDivisao.sgDivisao}"> sgDivisao </td>
 				</tr>
 				</tbody>
@@ -39,7 +39,7 @@
 
 
 	<!-- Modal -->
-	<form id="tabDivisaoObj" th:object="${tabDivisaoObj}" th:action="@{/cadastro/gravar/nivelTreino}" th:method="POST">
+	<form id="tabDivisaoObj" th:object="${tabDivisaoObj}" th:action="@{/cadastro/gravar/divisao}" th:method="POST">
 	<div class="modal fade" id="modalDivisao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
@@ -53,17 +53,18 @@
 						 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 					</div>
+
 					<div class="row">
 					
-					<input type="hidden"></input> <!-- Hidden ID -->
+					<input type="hidden" name="cdDivisao"></input> <!-- Hidden ID -->
 					
-						<div class="col-sm-6" id="divtxSexo">
+						<div class="col-sm-6" id="divsgSexoDivisao">
 							<div class="form-group">
-								<label for="txSigla">Sexo</label>
-								<select class="form-select" id="tabFreehandObj">
+								<label for="sgSexoDivisao">Sexo</label>
+								<select class="form-select" id="sgSexoDivisao" name="sgSexoDivisao" th:field="*{sgSexoDivisao}">
 									<option value="">Selecione o Sexo</option>
-									<option value="1">Feminino</option>
-									<option value="2">Masculino</option>
+									<option value="FEMININO">Feminino</option>
+									<option value="MASCULINO">Masculino</option>
 								</select>
 							</div>
 						</div>
@@ -71,10 +72,10 @@
 
 
 
-						<div class="col-sm-6" id="divtxSigla">
+						<div class="col-sm-6" id="divsgDivisao">
 							<div class="form-group">
-								<label for="txSigla">Sigla</label>
-								<input type="text" class="form-control" id="txSigla" name="txSigla" />
+								<label for="sgDivisao">Sigla</label>
+								<input type="text" class="form-control" id="sgDivisao" name="sgDivisao" th:field="*{sgDivisao}" />
 							</div>
 						</div>
 					</div>
@@ -84,7 +85,7 @@
 
 				<div class="modal-footer">
 					<div class="col-sm-12 text-center">
-						<a href="javascript: gravarModalCadastro('modalDivisao', 'tabDivisaoObj', '/cadastro/divisaoTreino/gravar', 'divisoesTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
+						<a href="javascript: gravarModalCadastro('modalDivisao', 'tabDivisaoObj', '/cadastro/gravar/divisao', 'divisao')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 					</div>
 				</div>
 			</div>
@@ -105,6 +106,11 @@
 						"pageLength": 3
 					}
 			);
+
+			var modal = /*[[${abrirModal}]]*/null;
+			if(modal != null) {
+				abrirModal(modal);
+			}
 		});
 
 		/*]]>*/
