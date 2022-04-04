@@ -26,7 +26,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="listNivelTreino : ${listNivelTreino}">
-						<td style="padding-left: 0.625rem" th:text="${listNivelTreino.txNivelTreino}" th:onclick="|consultarItemCadastro('niveisTreino', 'modalNivelTreino', '@{/cadastro/nivelTreino/consultar}/${listNivelTreino.cdNivelTreino}')|"> txNivelTreino </td>
+						<td style="padding-left: 0.625rem" th:text="${listNivelTreino.txNivelTreino}" th:onclick="|consultarItemCadastro('niveisTreino', '@{/cadastro/consultar/nivelTreino}/${listNivelTreino.cdNivelTreino}')|"> txNivelTreino </td>
 						<td class="blue" th:text="${listNivelTreino.dsNivelTreino}"> dsNivelTreino </td>
 					</tr>
 				</tbody>
@@ -54,7 +54,7 @@
 						
 						<div class="row" style="margin-top: 0.313rem">
 
-							<input type="hidden" id="cdNivelTreino" th:value="*{cdNivelTreino}"></input> <!-- Hidden ID -->
+							<input type="hidden" id="cdNivelTreino" name="cdNivelTreino" th:value="*{cdNivelTreino}"></input> <!-- Hidden ID -->
 
 							<div class="col-sm-4" id="divtxNomeNivelTreino">
 								<div class="form-group">

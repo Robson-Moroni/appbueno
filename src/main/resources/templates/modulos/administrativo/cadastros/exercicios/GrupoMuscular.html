@@ -26,7 +26,7 @@
 				</thead>
 				<tbody>
 				<tr th:each="listGrupoMuscular : ${listGrupoMuscular}">
-					<td style="padding-left: 0.625rem" th:text="${listGrupoMuscular.txGrupoMuscular}" th:onclick="|consultarItemCadastro('modalNivelTreino', '@{/cadastro/nivelTreino/consultar}/${listGrupoMuscular.cdGrupoMuscular}')|"> txGrupoMuscular </td>
+					<td style="padding-left: 0.625rem" th:text="${listGrupoMuscular.txGrupoMuscular}" th:onclick="|consultarItemCadastro('gruposMusculares', '@{/cadastro/consultar/grupoMuscular}/${listGrupoMuscular.cdGrupoMuscular}')|"> txGrupoMuscular </td>
 					<td class="blue" th:text="${listGrupoMuscular.dsGrupoMuscular}"> dsGrupoMuscular </td>
 				</tr>
 				</tbody>
@@ -36,7 +36,7 @@
 	</div>
 
 	<!-- Modal -->
-	<form id="tabGrupoMusucularObj" th:object="${tabGrupoMuscularObj}" th:action="@{/cadastro/gravar/grupomuscular}" th:method="POST">
+	<form id="tabGrupoMusucularObj" th:object="${tabGrupoMuscularObj}" th:action="@{/cadastro/gravar/grupoMuscular}" th:method="POST">
 		<div class="modal fade" id="modalGrupoMuscular" tabindex="-1" aria-labelledby="exampleModalLabel"
 			aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-lg">
@@ -54,7 +54,7 @@
 						</div>
 						<div class="row">
 
-							<input type="hidden"></input> <!-- Hidden ID -->
+							<input type="hidden" name="cdGrupoMuscular" th:value="*{cdGrupoMuscular}"></input> <!-- Hidden ID -->
 
 							<div class="col-sm-4" id="divtxGrupoMuscular">
 								<div class="form-group">
@@ -102,7 +102,7 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<a href="javascript: gravarModalCadastro('modalGrupoMuscular', 'tabGrupoMusucularObj', '/cadastro/gravar/grupomuscular', 'gruposMusculares')">
+							<a href="javascript: gravarModalCadastro('modalGrupoMuscular', 'tabGrupoMusucularObj', '/cadastro/gravar/grupoMuscular', 'gruposMusculares')">
 								<span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 						</div>
 					</div>

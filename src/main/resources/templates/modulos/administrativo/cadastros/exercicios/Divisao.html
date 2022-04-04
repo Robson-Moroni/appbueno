@@ -28,7 +28,7 @@
 				</thead>
 				<tbody>
 				<tr th:each="listDivisao : ${listDivisao}">
-					<td style="padding-left: 0.625rem" th:text="${listDivisao.sgSexoDivisao}" th:onclick="|consultarItemCadastro('modalSerie', '@{/cadastro/consultar/divisao}/${listDivisao.cdDivisao}')|"> sgSexoDivisao </td>
+					<td style="padding-left: 0.625rem" th:text="${listDivisao.sgSexoDivisao}" th:onclick="|consultarItemCadastro('divisao', '@{/cadastro/consultar/divisao}/${listDivisao.cdDivisao}')|"> sgSexoDivisao </td>
 					<td class="blue" th:text="${listDivisao.sgDivisao}"> sgDivisao </td>
 				</tr>
 				</tbody>
@@ -56,7 +56,7 @@
 
 					<div class="row">
 					
-					<input type="hidden" name="cdDivisao"></input> <!-- Hidden ID -->
+					<input type="hidden" name="cdDivisao" th:value="*{cdDivisao}"></input> <!-- Hidden ID -->
 					
 						<div class="col-sm-6" id="divsgSexoDivisao">
 							<div class="form-group">

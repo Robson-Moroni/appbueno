@@ -130,12 +130,12 @@ public class TabCadastrosController {
 		return mv;
 	}
 
-	@GetMapping("/consultar/grupomuscular/{cdGrupoMuscular}")
+	@GetMapping("/consultar/grupoMuscular/{cdGrupoMuscular}")
 	public ModelAndView consultarGrupoMusucular(@PathVariable Integer cdGrupoMuscular){
 		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "exercicios/GrupoMuscular");
 		TabGrupoMuscularObj tabGrupoMuscularObj = tabGrupoMuscularService.consultar(cdGrupoMuscular);
 		mv.addObject("tabGrupoMuscularObj", tabGrupoMuscularObj);
-		mv.addObject("listGrupoMuscular", tabNivelTreinoService.listar());
+		mv.addObject("listGrupoMuscular", tabGrupoMuscularService.listar());
 		mv.addObject("abrirModal", "modalGrupoMuscular");
 		return mv;
 	}
