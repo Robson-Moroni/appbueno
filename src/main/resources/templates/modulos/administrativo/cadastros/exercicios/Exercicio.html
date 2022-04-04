@@ -27,7 +27,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="listExercicio : ${listExercicio}">
-						<td style="padding-left: 0.625rem" th:text="${listExercicio.txNomeExercicio}" th:onclick="|consultarItemCadastro('modalExercicio', '@{/cadastro/nivelTreino/consultar}/${listExercicio.cdExercicio}')|"> txNivelTreino </td>
+						<td style="padding-left: 0.625rem" th:text="${listExercicio.txNomeExercicio}" th:onclick="|consultarItemCadastro('exerciciosTreino', '@{/cadastro/consultar/exercicio}/${listExercicio.cdExercicio}')|"> txNivelTreino </td>
 						<td class="blue" th:text="${listExercicio.dsExercicio}"> dsNivelTreino </td>
 						<td class="blue" th:text="${listExercicio.tabGrupoMuscularObj.txGrupoMuscular}"> dsNivelTreino </td>
 					</tr>
@@ -56,7 +56,7 @@
 						
 						<div class="row" style="margin-top: 0.313rem">
 
-							<input type="hidden" id="cdExercicio" th:value="*{cdExercicio}"></input> <!-- Hidden ID -->
+							<input type="hidden" id="cdExercicio" name="cdExercicio" th:value="*{cdExercicio}"></input> <!-- Hidden ID -->
 
 							<div class="col-sm-4" id="divtxNomeExercicio">
 								<div class="form-group">
@@ -92,7 +92,7 @@
 								<div class="form-group">
 									<label for="txCaminhoBanner">Banner do Exercício</label>
 									<input class="form-control" type="file" id="txCaminhoBanner"
-										   name="txCaminhoBanner" />
+										    />
 								</div>
 							</div>
 
@@ -100,7 +100,7 @@
 								<div class="form-group">
 									<label for="txImgDemonstrativaExercicio">Banner do Vídeo</label>
 									<input class="form-control" type="file" id="txImgDemonstrativaExercicio"
-										   name="txImgDemonstrativaExercicio" />
+										  />
 								</div>
 							</div>
 
@@ -108,7 +108,7 @@
 								<div class="form-group">
 									<label for="txCaminhoVideo">Vídeo</label>
 									<input class="form-control" type="file" id="txCaminhoVideo"
-										   name="txCaminhoVideo" />
+										   />
 								</div>
 							</div>
 						</div>
@@ -133,7 +133,7 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<a href="javascript: gravarModalCadastro('modalExercicio', 'tabExercicioObj', '/cadastro/nivelTreino/gravar', 'niveisTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
+							<a href="javascript: gravarModalCadastro('modalExercicio', 'tabExercicioObj', '/cadastro/gravar/exercicio', 'exerciciosTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 						</div>
 					</div>
 				</div>
@@ -153,6 +153,11 @@
 						"pageLength": 3
 					}
 			);
+
+			var modal = /*[[${abrirModal}]]*/null;
+			if(modal != null) {
+				abrirModal(modal);
+			}
 		});
 
 		/*]]>*/

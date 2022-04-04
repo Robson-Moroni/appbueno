@@ -150,6 +150,20 @@ public class TabCadastrosController {
 		return mv;
 	}
 
+	@GetMapping("/consultar/exercicio/{cdExercicio}")
+	public ModelAndView consultarExercicio(@PathVariable Integer cdExercicio){
+		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "exercicios/Exercicio");
+		TabExercicioObj tabExercicioObj = tabExercicioService.consultar(cdExercicio);
+		mv.addObject("tabExercicioObj", tabExercicioObj);
+		mv.addObject("listExercicio", tabExercicioService.listar());
+		mv.addObject("abrirModal", "modalExercicio");
+		return mv;
+	}
+
+
+
+
+
 
 	/*Metodos de Gravação*/
 
