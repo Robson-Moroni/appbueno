@@ -8,6 +8,8 @@ import com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.
 import com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.suporte.TabSuporteCategoriaService;
 import com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.suporte.TabSuportePerguntaRespostaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -50,14 +52,11 @@ public class TabCadastrosController {
 	@GetMapping
 	public ModelAndView show(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView(txUrlTela + "cadastros");
-		//carregarNovasInstancias(mv);
 		return mv;
 	}
 
-
-
 	/* Listagens */
-	@GetMapping("/divisoesTreino/listar")
+	@GetMapping("/listar/divisao")
 	public ModelAndView listarDivisoesTreino(){
 		ModelAndView mv = new ModelAndView(txUrlTela + "exercicios/Divisao");
 		mv.addObject("tabDivisaoObj", new TabDivisaoObj());
@@ -65,63 +64,64 @@ public class TabCadastrosController {
 		return mv;
 	}
 
-	@GetMapping("/gruposMusculares/listar")
+	@GetMapping("/listar/grupoMuscular")
 	public ModelAndView listarGruposMusculares(){
 		ModelAndView mv = new ModelAndView(txUrlTela + "exercicios/GrupoMuscular");
-		mv.addObject("tabGrupoMuscularesObj", new TabGrupoMuscularObj());
+		mv.addObject(new TabGrupoMuscularObj());
 		mv.addObject("listGrupoMuscular", tabGrupoMuscularService.listar());
 		return mv;
 	}
 
-	@GetMapping("/nivelTreino/listar")
+	@GetMapping("/listar/nivelTreino")
 	public ModelAndView listarNivelTreino(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView(txUrlTela + "exercicios/NivelTreino");
-		mv.addObject("tabNivelTreinoObj", new TabNivelTreinoObj());
+		mv.addObject(new TabNivelTreinoObj());
 		mv.addObject("listNivelTreino", tabNivelTreinoService.listar());
-
-		if (request.getParameter("novo") != null) {
-			mv.addObject("abrirModal", "modalNivelTreino");
-		}
 
 		return mv;
 	}
 
-	@GetMapping("/exerciciosTreino/listar")
+	@GetMapping("/listar/exercicio")
 	public ModelAndView listarExerciciosTreino(){
 		ModelAndView mv = new ModelAndView(txUrlTela + "exercicios/exercicio");
-		mv.addObject("tabExercicioObj", new TabExercicioObj());
+		mv.addObject(new TabExercicioObj());
 		mv.addObject("listExercicio", tabExercicioService.listar());
 		return mv;
 	}
 
-	@GetMapping("/seriesTreino/listar")
+	@GetMapping("/listar/serie")
 	public ModelAndView listarSeriesTreino(){
 		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "exercicios/series");
-		mv.addObject("tabSerieObj", new TabSerieObj());
+		mv.addObject(new TabSerieObj());
 		mv.addObject("listSerie", tabSerieService.listar());
 		return mv;
 	}
 
-	@GetMapping("/suporteCategoria/listar")
+	@GetMapping("/listar/suporteCategoria")
 	public ModelAndView listarSuporteCategoria(){
 		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "suporte/categoria");
-		mv.addObject("tabSuporteCategoriaObj", new TabSuporteCategoriaObj());
+		mv.addObject(new TabSuporteCategoriaObj());
 		mv.addObject("listSuporteCategoria", tabSuporteCategoriaService.listar());
 		return mv;
 	}
 
-	@GetMapping("/suportePerguntaResposta/listar")
+	@GetMapping("/listar/suportePerguntaResposta")
 	public ModelAndView listarSuportePerguntaResposta() {
 		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "suporte/categoria");
-		mv.addObject("tabSuportePerguntaRespostaObj", new TabSuportePerguntaRespostaObj());
+		mv.addObject(new TabSuportePerguntaRespostaObj());
 		mv.addObject("listSuportePerguntaResposta", tabSuportePerguntaRespostaService.listar());
 		return mv;
 	}
 
+
+
+
+
+
 	/* Consultas */
 
-	@GetMapping("/nivelTreino/consultar/{cdNivelTreino}")
-	public ModelAndView novoNivelTreino(@PathVariable Integer cdNivelTreino){
+	@GetMapping("/consultar/nivelTreino/{cdNivelTreino}")
+	public ModelAndView consultarNivelTreino(@PathVariable Integer cdNivelTreino){
 		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "exercicios/NivelTreino");
 		TabNivelTreinoObj tabNivelTreinoObj = tabNivelTreinoService.consultar(cdNivelTreino);
 		mv.addObject("tabNivelTreinoObj", tabNivelTreinoObj);
@@ -130,7 +130,44 @@ public class TabCadastrosController {
 		return mv;
 	}
 
-	@PostMapping("/nivelTreino/gravar")
+	@GetMapping("/consultar/grupoMuscular/{cdGrupoMuscular}")
+	public ModelAndView consultarGrupoMusucular(@PathVariable Integer cdGrupoMuscular){
+		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "exercicios/GrupoMuscular");
+		TabGrupoMuscularObj tabGrupoMuscularObj = tabGrupoMuscularService.consultar(cdGrupoMuscular);
+		mv.addObject("tabGrupoMuscularObj", tabGrupoMuscularObj);
+		mv.addObject("listGrupoMuscular", tabGrupoMuscularService.listar());
+		mv.addObject("abrirModal", "modalGrupoMuscular");
+		return mv;
+	}
+
+	@GetMapping("/consultar/divisao/{cdDivisao}")
+	public ModelAndView consultarDivisao(@PathVariable Integer cdDivisao){
+		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "exercicios/Divisao");
+		TabDivisaoObj tabDivisaoObj = tabDivisaoService.consultar(cdDivisao);
+		mv.addObject("tabDivisaoObj", tabDivisaoObj);
+		mv.addObject("listDivisao", tabDivisaoService.listar());
+		mv.addObject("abrirModal", "modalDivisao");
+		return mv;
+	}
+
+	@GetMapping("/consultar/exercicio/{cdExercicio}")
+	public ModelAndView consultarExercicio(@PathVariable Integer cdExercicio){
+		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "exercicios/Exercicio");
+		TabExercicioObj tabExercicioObj = tabExercicioService.consultar(cdExercicio);
+		mv.addObject("tabExercicioObj", tabExercicioObj);
+		mv.addObject("listExercicio", tabExercicioService.listar());
+		mv.addObject("abrirModal", "modalExercicio");
+		return mv;
+	}
+
+
+
+
+
+
+	/*Metodos de Gravação*/
+
+	@PostMapping("/gravar/nivelTreino")
 	public @ResponseBody List<?> gravarNivelTreino(@Validated TabNivelTreinoObj tabNivelTreinoObj, HttpServletRequest httpServletRequest, Errors erros){
 		List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
 		try {
@@ -138,7 +175,7 @@ public class TabCadastrosController {
 			List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
 			TabRetornoBean sucesso = new TabRetornoBean();
 			sucesso.setCdStatus(1);
-			sucesso.setTxEndPointRetorno("/cadastro/nivelTreino/listar");
+			sucesso.setTxEndPointRetorno("/cadastro/listar/nivelTreino");
 			success.add(sucesso);
 			return success;
 
@@ -151,7 +188,7 @@ public class TabCadastrosController {
 		}
 	}
 
-	@PostMapping("/GrupoMuscular/gravar")
+	@PostMapping("/gravar/grupoMuscular")
 	public @ResponseBody List<?> gravarGrupoMuscular(@Validated TabGrupoMuscularObj tabGrupoMuscularObj, HttpServletRequest httpServletRequest, Errors erros){
 		List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
 		try {
@@ -159,7 +196,7 @@ public class TabCadastrosController {
 			List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
 			TabRetornoBean sucesso = new TabRetornoBean();
 			sucesso.setCdStatus(1);
-			sucesso.setTxEndPointRetorno("/cadastro/GrupoMuscular/listar");
+			sucesso.setTxEndPointRetorno("/cadastro/listar/grupoMuscular");
 			success.add(sucesso);
 			return success;
 
@@ -172,7 +209,7 @@ public class TabCadastrosController {
 		}
 	}
 
-	@PostMapping("/Divisao/gravar")
+	@PostMapping("/gravar/divisao")
 	public @ResponseBody List<?> gravarDivisao(@Validated TabDivisaoObj tabDivisaoObj, HttpServletRequest httpServletRequest, Errors erros){
 		List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
 		try {
@@ -180,7 +217,7 @@ public class TabCadastrosController {
 			List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
 			TabRetornoBean sucesso = new TabRetornoBean();
 			sucesso.setCdStatus(1);
-			sucesso.setTxEndPointRetorno("/cadastro/Divisao/listar");
+			sucesso.setTxEndPointRetorno("/cadastro/listar/divisao");
 			success.add(sucesso);
 			return success;
 
@@ -193,7 +230,7 @@ public class TabCadastrosController {
 		}
 	}
 
-	@PostMapping("/Exercicio/gravar")
+	@PostMapping("/gravar/exercicio")
 	public @ResponseBody List<?> gravarExercicio(@Validated TabExercicioObj tabExercicioObj, HttpServletRequest httpServletRequest, Errors erros){
 		List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
 		try {
@@ -201,7 +238,7 @@ public class TabCadastrosController {
 			List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
 			TabRetornoBean sucesso = new TabRetornoBean();
 			sucesso.setCdStatus(1);
-			sucesso.setTxEndPointRetorno("/cadastro/Exercicio/listar");
+			sucesso.setTxEndPointRetorno("/cadastro/listar/exercicio");
 			success.add(sucesso);
 			return success;
 
@@ -214,6 +251,8 @@ public class TabCadastrosController {
 		}
 	}
 
+
+	/*seleções que alimentam os seletores em tela */
 
 	@ModelAttribute("selectGrupoMuscular")
 	public List<TabGrupoMuscularObj> selectGrupoMuscular() {
