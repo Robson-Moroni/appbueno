@@ -161,6 +161,17 @@ public class TabCadastrosController {
 	}
 
 
+	@GetMapping("/consultar/serie/{cdSerie}")
+	public ModelAndView consultarSerie(@PathVariable Integer cdSerie){
+		ModelAndView mv = new ModelAndView(TagConstants.TAG_TEMPLATE_CADASTROS + "exercicios/Series");
+		TabSerieObj tabSerieObj = tabSerieService.consultar(cdSerie);
+		mv.addObject("tabSerieObj", tabSerieObj);
+		mv.addObject("listSerie", tabSerieService.listar());
+		mv.addObject("abrirModal", "modalSerie");
+		return mv;
+	}
+
+
 
 
 
@@ -250,6 +261,33 @@ public class TabCadastrosController {
 			return error;
 		}
 	}
+
+
+	@PostMapping("/gravar/serie")
+	public @ResponseBody List<?> gravarSerie(@Validated TabSerieObj tabSerieObj, HttpServletRequest httpServletRequest, Errors erros){
+		List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
+		try {
+			tabSerieService.gravar(tabSerieObj);
+			List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
+			TabRetornoBean sucesso = new TabRetornoBean();
+			sucesso.setCdStatus(1);
+			sucesso.setTxEndPointRetorno("/cadastro/listar/serie");
+			success.add(sucesso);
+			return success;
+
+		}
+		catch (Exception ex) {
+			TabRetornoBean erro = new TabRetornoBean();
+			erro.setCdStatus(0);
+			error.add(erro);
+			return error;
+		}
+	}
+
+
+
+
+
 
 
 	/*seleções que alimentam os seletores em tela */
