@@ -30,7 +30,7 @@ function loadPage(idTable, txEndPoint){
     $("#" + idTable).load(txEndPoint);
 }
 
-function consultarItemCadastro(idTable, idModal, urlDestino) {
+function consultarItemCadastro(idTable, urlDestino) {
     loadPage(idTable,urlDestino);
 }
 

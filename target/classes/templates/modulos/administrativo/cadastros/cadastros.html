@@ -34,7 +34,7 @@
 			<!-- Exercícios -->
 				<div class="tab-pane fade show active" id="pills-exercicios" role="tabpanel" aria-labelledby="pills-exercicios-tab">
 				<div class="row">
-					<div class="col-sm-4" style="margin-left: -0.813rem" id="divisoesTreino"></div>
+					<div class="col-sm-4" style="margin-left: -0.813rem" id="divisao"></div>
 					<div class="col-sm-4" style="margin-left: 0.406rem" id="gruposMusculares"></div>
 					<div class="col-sm-4" style="margin-left: 0.406rem" id="niveisTreino"></div>
 				</div>
@@ -60,12 +60,12 @@
 
 	<script>
 		$(document).ready(function () {
-			loadPage('divisoesTreino', '/cadastro/divisoesTreino/listar');
-			loadPage('gruposMusculares', '/cadastro/gruposMusculares/listar');
-			loadPage('niveisTreino', '/cadastro/nivelTreino/listar');
-			loadPage('exerciciosTreino','/cadastro/exerciciosTreino/listar');
-			loadPage('seriesTreino','/cadastro/seriesTreino/listar');
-			loadPage('suporteCategoria', '/cadastro/suporteCategoria/listar');
+			loadPage('divisao', '/cadastro/listar/divisao');
+			loadPage('gruposMusculares', '/cadastro/listar/grupoMuscular');
+			loadPage('niveisTreino', '/cadastro/listar/nivelTreino');
+			loadPage('exerciciosTreino','/cadastro/listar/exercicio');
+			loadPage('seriesTreino','/cadastro/listar/serie');
+			loadPage('suporteCategoria', '/cadastro/listar/suporteCategoria');
 		});
 	</script>
 </section>

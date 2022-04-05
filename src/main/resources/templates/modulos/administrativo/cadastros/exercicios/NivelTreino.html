@@ -9,7 +9,7 @@
 					Níveis de Treino
 				</div>
 				<div class="col-sm-3 font-size-12px text-center">
-					<a href="javascript: loadPage('niveisTreino', '/cadastro/nivelTreino/listar?novo')">
+					<a href="javascript: abrirModal('modalNivelTreino')">
 						<div class="btn-pill-white" style="font-weight: 600;">Novo</div>
 					</a>
 				</div>
@@ -26,7 +26,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="listNivelTreino : ${listNivelTreino}">
-						<td style="padding-left: 0.625rem" th:text="${listNivelTreino.txNivelTreino}" th:onclick="|consultarItemCadastro('niveisTreino', 'modalNivelTreino', '@{/cadastro/nivelTreino/consultar}/${listNivelTreino.cdNivelTreino}')|"> txNivelTreino </td>
+						<td style="padding-left: 0.625rem" th:text="${listNivelTreino.txNivelTreino}" th:onclick="|consultarItemCadastro('niveisTreino', '@{/cadastro/consultar/nivelTreino}/${listNivelTreino.cdNivelTreino}')|"> txNivelTreino </td>
 						<td class="blue" th:text="${listNivelTreino.dsNivelTreino}"> dsNivelTreino </td>
 					</tr>
 				</tbody>
@@ -54,7 +54,7 @@
 						
 						<div class="row" style="margin-top: 0.313rem">
 
-							<input type="hidden" id="cdNivelTreino" th:value="*{cdNivelTreino}"></input> <!-- Hidden ID -->
+							<input type="hidden" id="cdNivelTreino" name="cdNivelTreino" th:value="*{cdNivelTreino}"></input> <!-- Hidden ID -->
 
 							<div class="col-sm-4" id="divtxNomeNivelTreino">
 								<div class="form-group">
@@ -77,7 +77,7 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<a href="javascript: gravarModalCadastro('modalNivelTreino', 'tabNivelTreinoObj', '/cadastro/nivelTreino/gravar', 'niveisTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
+							<a href="javascript: gravarModalCadastro('modalNivelTreino', 'tabNivelTreinoObj', '/cadastro/gravar/nivelTreino', 'niveisTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 						</div>
 					</div>
 				</div>
