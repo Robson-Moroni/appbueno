@@ -85,7 +85,12 @@
 							<div class="col-sm-11 font-size-15px blue" style="font-weight: 600;">
 								Divisões Pertencentes
 							</div>
-
+							<div class="col-sm-12">
+								<div class="form-check" th:each="selectDivisoes : ${selectDivisoes}">
+									<input class="form-check-input" type="checkbox" th:value="${selectDivisoes.cdDivisao}" th:id="${selectDivisoes.cdDivisao}" />
+									<label class="form-check-label" for="flexCheckChecked" th:text="${selectDivisoes.sgDivisao}"></label>
+								</div>
+							</div>
 
 						</div>
 						<br />
