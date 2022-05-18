@@ -5,7 +5,10 @@ import com.sistema.apptreino.api.dao.TabDadosFisicoObj;
 import com.sistema.apptreino.api.modulo.service.TabApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -20,7 +23,7 @@ public class TabApiController {
 
 
 
-    @GetMapping("/consultar/dadosFisico")
+    @GetMapping("/consultar/dadosFisico/{txHash}")
     private TabDadosFisicoObj consultaDadosFisico(){
 
         return new TabDadosFisicoObj();
@@ -28,7 +31,7 @@ public class TabApiController {
     }
 
 
-    @GetMapping("/gravar/dadosFisico")
+    @PostMapping ("/gravar/dadosFisico/{txHash}")
     private TabDadosFisicoObj gravarDadosFisico(){
 
 
@@ -36,5 +39,40 @@ public class TabApiController {
         return new TabDadosFisicoObj();
 
     }
+
+
+    @GetMapping("/gerar/planoTreino/{txHash}")
+    private void gerarPlanoTreino(@PathVariable String txHash){
+
+
+
+
+
+    }
+
+
+    @PostMapping("/renovar/planoTreino/{txHash}")
+    private void renovarPlanoTreino(@PathVariable String txHash){
+
+
+
+
+
+    }
+
+
+    @PostMapping("/substituir/exercicio/{txHash}")
+    private void substituirExercicio(@PathVariable String txHash){
+
+
+
+
+
+    }
+
+
+
+
+
 
 }
