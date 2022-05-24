@@ -36,7 +36,7 @@ public class TabApiController {
     private TabDadosFisicosUsuarioRepository tabDadosFisicosUsuarioRepository;
 
     @PostMapping("/usuario/gravar")
-    public @ResponseBody ResponseEntity<List<?>> gravarUsuario(@Validated TabUsuarioObj tabUsuarioObj){
+    public @ResponseBody ResponseEntity<List<?>> gravarUsuario(@Validated @RequestBody TabUsuarioObj tabUsuarioObj){
         List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
         if(tabUsuarioObj.getTxEmail() != null) {
             try {
@@ -67,7 +67,7 @@ public class TabApiController {
     }
 
     @PostMapping("/usuario/dadosfisicos/gravar/{cdUsuario}")
-    public @ResponseBody ResponseEntity<List<?>> gravarDadosFisicos(@Validated TabDadosFisicosUsuarioObj tabDadosFisicosUsuarioObj, Integer cdUsuario){
+    public @ResponseBody ResponseEntity<List<?>> gravarDadosFisicos(@Validated @RequestBody TabDadosFisicosUsuarioObj tabDadosFisicosUsuarioObj, Integer cdUsuario){
         List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
 
         TabUsuarioObj tabUsuarioObj = tabUsuarioService.buscar(cdUsuario);
