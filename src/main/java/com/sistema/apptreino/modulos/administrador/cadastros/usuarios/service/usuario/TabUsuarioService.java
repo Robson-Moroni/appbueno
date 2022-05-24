@@ -26,5 +26,9 @@ public class TabUsuarioService {
        }
     }
 
+    public TabUsuarioObj buscar(Integer cdUsuario) {
+        TabUsuarioObj tabUsuarioObj = tabUsuarioRepository.findOne(cdUsuario);
+        return tabUsuarioObj;
+    }
 
 }

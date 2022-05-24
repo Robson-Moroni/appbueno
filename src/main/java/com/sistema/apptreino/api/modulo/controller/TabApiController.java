@@ -2,9 +2,11 @@ package com.sistema.apptreino.api.modulo.controller;
 
 import com.sistema.apptreino.api.dao.TabDadosFisicoObj;
 import com.sistema.apptreino.api.modulo.service.TabApiService;
+import com.sistema.apptreino.dao.TabDadosFisicosUsuarioObj;
 import com.sistema.apptreino.dao.TabNivelTreinoObj;
 import com.sistema.apptreino.dao.TabUsuarioObj;
 import com.sistema.apptreino.dao.bean.TabRetornoBean;
+import com.sistema.apptreino.dao.repository.TabDadosFisicosUsuarioRepository;
 import com.sistema.apptreino.modulos.administrador.cadastros.usuarios.service.usuario.TabUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +32,11 @@ public class TabApiController {
     @Autowired
     private TabUsuarioService tabUsuarioService;
 
+    @Autowired
+    private TabDadosFisicosUsuarioRepository tabDadosFisicosUsuarioRepository;
+
     @PostMapping("/usuario/gravar")
-    public @ResponseBody ResponseEntity<List<?>> gravarUsuario(@Validated TabUsuarioObj tabUsuarioObj, HttpServletRequest httpServletRequest, Errors erros){
+    public @ResponseBody ResponseEntity<List<?>> gravarUsuario(@Validated TabUsuarioObj tabUsuarioObj){
         List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
         if(tabUsuarioObj.getTxEmail() != null) {
             try {
@@ -61,6 +66,36 @@ public class TabApiController {
         }
     }
 
+    @PostMapping("/usuario/dadosfisicos/gravar/{cdUsuario}")
+    public @ResponseBody ResponseEntity<List<?>> gravarDadosFisicos(@Validated TabDadosFisicosUsuarioObj tabDadosFisicosUsuarioObj, Integer cdUsuario){
+        List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
+
+        TabUsuarioObj tabUsuarioObj = tabUsuarioService.buscar(cdUsuario);
+
+        if(tabUsuarioObj != null) {
+            try {
+                tabDadosFisicosUsuarioObj.setCdUsuario(cdUsuario);
+                tabDadosFisicosUsuarioRepository.save(tabDadosFisicosUsuarioObj);
+                List<TabDadosFisicosUsuarioObj> Tab = new ArrayList<TabDadosFisicosUsuarioObj>();
+                Tab.add(tabDadosFisicosUsuarioObj);
+                return ResponseEntity.ok(Tab);
+
+            }
+            catch (Exception ex) {
+                TabRetornoBean erro = new TabRetornoBean();
+                erro.setCdStatus(0);
+                error.add(erro);
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+            }
+        }
+        else {
+            TabRetornoBean erro = new TabRetornoBean();
+            erro.setCdStatus(0);
+            error.add(erro);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+        }
+    }
+
 
     @GetMapping("/consultar/dadosFisico/{txHash}")
     private TabDadosFisicoObj consultaDadosFisico(){
@@ -69,15 +104,6 @@ public class TabApiController {
 
     }
 
-
-    @PostMapping ("/gravar/dadosFisico/{txHash}")
-    private TabDadosFisicoObj gravarDadosFisico(){
-
-
-
-        return new TabDadosFisicoObj();
-
-    }
 
 
     @GetMapping("/gerar/planoTreino/{txHash}")
