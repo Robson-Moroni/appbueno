@@ -15,4 +15,6 @@ public class TabRetornoBean {
 
     private String txEndPointRetorno;
 
+    private String txRetorno;
+
 }

@@ -1,23 +1,19 @@
 package com.sistema.apptreino.modulos.administrador.cadastros.exercicios.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.sistema.apptreino.TagConstants;
 import com.sistema.apptreino.dao.*;
 import com.sistema.apptreino.dao.bean.TabRetornoBean;
 import com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.exercicios.*;
 import com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.suporte.TabSuporteCategoriaService;
 import com.sistema.apptreino.modulos.administrador.cadastros.exercicios.service.suporte.TabSuportePerguntaRespostaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sistema.apptreino.TagConstants;
-
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
