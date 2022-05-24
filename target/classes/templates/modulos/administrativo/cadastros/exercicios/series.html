@@ -26,10 +26,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="listExercicio : ${listExercicio}">
-						<td style="padding-left: 0.625rem" th:text="${listExercicio.txNomeExercicio}" th:onclick="|consultarItemCadastro('modalSerie', '@{/cadastro/nivelTreino/consultar}/${listExercicio.cdExercicio}')|"> txNivelTreino </td>
-						<td class="blue" th:text="${listExercicio.dsExercicio}"> dsNivelTreino </td>
-						<td class="blue" th:text="${listExercicio.tabGrupoMuscularObj.txGrupoMuscular}"> dsNivelTreino </td>
+					<tr th:each="listSerie : ${listSerie}">
+						<td style="padding-left: 0.625rem" th:text="${listSerie.tabNivelTreinoObj != null} ? ${listSerie.tabNivelTreinoObj.txNivelTreino} : ''" th:onclick="|consultarItemCadastro('seriesTreino', '@{/cadastro/consultar/serie}/${listSerie.cdSerie}')|"> txNivelTreino </td>
+						<td class="blue" th:text="${listSerie.qtExerciciosDiaSerie}">  </td>
+						<td class="blue" th:text="${listSerie.qtMinSeriesSemana}">  </td>
 					</tr>
 				</tbody>
 
@@ -38,7 +38,7 @@
 	</div>
 
 	<!-- Modal -->
-	<form id="tabSerieObj" th:object="${tabSerieObj}" th:action="@{/cadastro/serie/gravar}" th:method="POST">
+	<form id="tabSerieObj" th:object="${tabSerieObj}" th:action="@{/cadastro/gravar/serie}" th:method="POST">
 		<div class="modal fade" id="modalSerie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-xl">
 				<div class="modal-content">
@@ -56,7 +56,7 @@
 						
 						<div class="row" style="margin-top: 0.313rem">
 
-							<input type="hidden" id="cdSerie" th:value="*{cdSerie}"></input> <!-- Hidden ID -->
+							<input type="hidden" id="cdSerie" name="cdSerie" th:value="*{cdSerie}"></input> <!-- Hidden ID -->
 
 							<div class="col-sm-4" id="divtabGrupoMuscularObj">
 								<div class="form-group">
@@ -150,7 +150,7 @@
 
 					<div class="modal-footer">
 						<div class="col-sm-12 text-center">
-							<a href="javascript: gravarModalCadastro('modalSerie', 'tabSerieObj', '/cadastro/serie/gravar', 'seriesTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
+							<a href="javascript: gravarModalCadastro('modalSerie', 'tabSerieObj', '/cadastro/gravar/serie', 'seriesTreino')"><span class="btn btn-primary col-sm-6" style="border-radius:10px">Gravar</span></a>
 						</div>
 					</div>
 				</div>
@@ -170,6 +170,11 @@
 						"pageLength": 3
 					}
 			);
+
+			var modal = /*[[${abrirModal}]]*/null;
+			if(modal != null) {
+				abrirModal(modal);
+			}
 		});
 
 		/*]]>*/
