@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -16,66 +17,58 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
+import javax.sql.DataSource;
+
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = AppUserDetailsService.class)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		
-	}
-	
-	
-	 
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring()
-		.antMatchers("/assets/css/**")
-				.antMatchers("/api/**");;
+    @Autowired
+    protected AppUserDetailsService appUserDetailsService;
 
-	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		
-		/*
-		http
-		.authorizeRequests()
-		.anyRequest().authenticated()		
-		.and()
-		.formLogin()		
-		//.loginPage("/login").successForwardUrl("/dashboard")
-		 .loginPage("/login")
-		 .defaultSuccessUrl("/authlogin", true)
-		 .permitAll()
-		.and()
-		.csrf().disable();
-		
-		http.sessionManagement().maximumSessions(20).sessionRegistry(sessionRegistry());
-		*/
-		http.httpBasic().disable();
-	}
-	
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
-	
-	@Bean
-	public SessionRegistry sessionRegistry() {
-	    return new SessionRegistryImpl();
-	}
 
-	@Bean
-	public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
-	    return new ServletListenerRegistrationBean<HttpSessionEventPublisher>(new HttpSessionEventPublisher());
-	}
-	
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/assets/css/**")
+                .antMatchers("/api/usuario/gravar");
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf()
+                .disable()
+                .httpBasic().and()
+                .authorizeRequests().antMatchers("/assets/css/**", "/api/usuario/gravar").permitAll().anyRequest().hasAnyRole();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+
+        return authProvider;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    @Bean
+    public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+        return new ServletListenerRegistrationBean<HttpSessionEventPublisher>(new HttpSessionEventPublisher());
+    }
 }

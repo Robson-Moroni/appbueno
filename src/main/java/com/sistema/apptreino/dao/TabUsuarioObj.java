@@ -28,7 +28,7 @@ public class TabUsuarioObj {
     @Temporal(TemporalType.DATE)
     private Date dtNascimento;
 
-    @Column(name = "tx_genero")
+    @Transient
     private String txGenero;
 
     @Column(name = "tx_telefone")

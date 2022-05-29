@@ -1,0 +1,37 @@
+.cardWidthFull {
+	background-color: #FFF;
+	width: 100%;
+	border-radius: 0.625rem;
+	padding: 0.313rem;
+}
+
+.nav-pills .nav-link {
+	border-radius: 1.563rem !important;
+}
+
+.card-header {
+	background-color: #0065FF !important;
+}
+
+.btn-pill-white {
+	background-color: #FFF;
+	color: #0065FF;
+	border-radius: 1.563rem;
+	padding-top: 0.313rem;
+	padding-bottom: 0.313rem;
+}
+
+.modal-content {
+	border-radius: 1.25rem !important;
+	border: 0 !important;
+	padding: 0.625rem !important;
+}
+
+.modal .modal-header .close {
+  color: #FF3636;
+  text-shadow: none;
+}
+
+.modal-footer {
+	border: 0!important;
+}
