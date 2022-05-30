@@ -1,10 +1,8 @@
 package com.sistema.apptreino.api.modulo.controller;
 
 import com.sistema.apptreino.api.dao.TabDadosFisicoObj;
-import com.sistema.apptreino.api.modulo.bean.LoginObj;
 import com.sistema.apptreino.api.modulo.service.TabApiService;
 import com.sistema.apptreino.dao.TabDadosFisicosUsuarioObj;
-import com.sistema.apptreino.dao.TabNivelTreinoObj;
 import com.sistema.apptreino.dao.TabUsuarioObj;
 import com.sistema.apptreino.dao.bean.TabRetornoBean;
 import com.sistema.apptreino.dao.repository.TabDadosFisicosUsuarioRepository;
@@ -14,15 +12,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/api")
@@ -35,8 +30,14 @@ public class TabApiController {
 
     @Autowired
     private TabDadosFisicosUsuarioRepository tabDadosFisicosUsuarioRepository;
+
+    @RequestMapping("/verifica")
+    public @ResponseBody ResponseEntity<?> verifica() {
+        return ResponseEntity.ok("Ok!");
+    }
+
     @PostMapping("/usuario/gravar")
-    public @ResponseBody ResponseEntity<List<?>> gravarUsuario(@Validated @RequestBody TabUsuarioObj tabUsuarioObj) {
+    public @ResponseBody ResponseEntity<?> gravarUsuario(@Validated @RequestBody TabUsuarioObj tabUsuarioObj) {
         List<TabRetornoBean> error = new ArrayList<TabRetornoBean>();
         if (tabUsuarioObj.getTxEmail() != null) {
             try {
@@ -45,13 +46,9 @@ public class TabApiController {
                 String txPassword = bCryptPasswordEncoder.encode(tabUsuarioObj.getTxSenha());
                 tabUsuarioObj.setTxSenha(txPassword);
 
-                tabUsuarioService.gravar(tabUsuarioObj);
+                TabUsuarioObj usuarioObj = tabUsuarioService.gravar(tabUsuarioObj);
 
-                List<TabRetornoBean> success = new ArrayList<TabRetornoBean>();
-                TabRetornoBean sucesso = new TabRetornoBean();
-                sucesso.setCdStatus(1);
-                success.add(sucesso);
-                return ResponseEntity.ok(success);
+                return ResponseEntity.ok(usuarioObj);
 
             } catch (Exception ex) {
                 TabRetornoBean erro = new TabRetornoBean();

@@ -18,12 +18,8 @@ public class TabUsuarioService {
     TabUsuarioRepository tabUsuarioRepository;
 
 
-    public boolean gravar (TabUsuarioObj tabUsuarioObj){
-       if(tabUsuarioRepository.save(tabUsuarioObj) != null){
-           return true;
-       }else {
-           return false;
-       }
+    public TabUsuarioObj gravar (TabUsuarioObj tabUsuarioObj){
+       return tabUsuarioRepository.save(tabUsuarioObj);
     }
 
     public TabUsuarioObj buscar(Integer cdUsuario) {
