@@ -1,4 +1,4 @@
 package com.sistema.apptreino.api.dao;
 
-public class TabPlanoTreinoObj {
+public class TabTreinoObj {
 }

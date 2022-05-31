@@ -94,23 +94,53 @@ public class TabApiController {
     }
 
 
-    @GetMapping("/consultar/dadosFisico/{txHash}")
+    @GetMapping("/consultar/dadosFisico")
     private TabDadosFisicoObj consultaDadosFisico() {
         return new TabDadosFisicoObj();
     }
 
 
-    @GetMapping("/gerar/planoTreino/{txHash}")
-    private void gerarPlanoTreino(@PathVariable String txHash) {
+    @GetMapping("/gerar/planoTreino")
+    private void gerarTreino(@PathVariable String txHash) {
+
+
+
+
+
     }
 
 
-    @PostMapping("/renovar/planoTreino/{txHash}")
+    @PostMapping("/renovar/planoTreino")
     private void renovarPlanoTreino(@PathVariable String txHash) {
+
     }
 
 
-    @PostMapping("/substituir/exercicio/{txHash}")
+    @PostMapping("/substituir/exercicio")
     private void substituirExercicio(@PathVariable String txHash) {
     }
+
+
+
+
+    //acesso de listar
+
+    @GetMapping("/listar/articulacoes")
+    public  List<?> listarArticulacoes(){
+
+        return tabApiService.listarArticulacao();
+
+    }
+
+    @GetMapping("/listar/agrupamentoMuscular")
+    public  List<?> listarAgrupamentoMuscular(){
+
+        return tab.listarArticulacao();
+
+    }
+
+
+
+
+
 }
